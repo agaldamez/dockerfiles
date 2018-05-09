@@ -10,14 +10,15 @@ FROM fedora:27
 LABEL maintainer "agaldamez"
 
 # install mono and other required packages
-RUN dnf install -y mono-core \ 
-	           mono-basic \ 
-                   expect \ 
-                   wget \ 
-		   unzip \ 
-		   gtk2-2.24.31-6.fc27 \
-                   PackageKit-gtk3-module \ 
-                   libcanberra-gtk2 
+RUN dnf install -y \ 
+	mono-core \ 
+	mono-basic \ 
+        expect \ 
+        wget \ 
+	unzip \ 
+	gtk2-2.24.31-6.fc27 \
+        PackageKit-gtk3-module \ 
+        libcanberra-gtk2 
 
 # append the gtk library to the PATH environment variable 
 RUN export PATH=$PATH:/usr/lib64/libgtk-x11-2.0.so.0
@@ -42,4 +43,4 @@ ENV USER networkminer
 USER $USER
 WORKDIR $HOME
 
-CMD mono /opt/NetworkMiner*/NetworkMiner.exe
+ENTRYPOINT mono /opt/NetworkMiner*/NetworkMiner.exe
