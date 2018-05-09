@@ -15,13 +15,15 @@ RUN dnf install -y mono-core \
                    expect \ 
                    wget \ 
 		   unzip \ 
-		   xauth \
 		   gtk2-2.24.31-6.fc27 \
                    PackageKit-gtk3-module \ 
-                   libcanberra-gtk2
+                   libcanberra-gtk2 
 
 # append the gtk library to the PATH environment variable 
 RUN export PATH=$PATH:/usr/lib64/libgtk-x11-2.0.so.0
+
+# import certificate bundle into mono 
+RUN cert-sync /etc/ssl/certs/ca-bundle.crt
 
 # install networkminer
 RUN wget www.netresec.com/?download=NetworkMiner -O /tmp/nm.zip
