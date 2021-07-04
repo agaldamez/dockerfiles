@@ -1,10 +1,11 @@
 # Run NetworkMiner from a container
 #
-# docker run -it --rm \
+# docker run -it -d \
 #	-e DISPLAY=$DISPLAY \ 
 #	-v /tmp/.X11-unix:/tmp/.X11-unix \
-#	-v /home/$USER/trace:/home/$USER/trace \
-#	network-miner
+#	-v /home/$USER/Projects/trace:/home/$USER/trace \
+#	--name network-miner \
+#   network-miner
 #
 FROM fedora:32
 LABEL maintainer "agaldamez"
@@ -13,12 +14,12 @@ LABEL maintainer "agaldamez"
 RUN dnf install -y \  
 	mono-core \
 	mono-basic \
-        expect \
-        wget \
+    expect \
+    wget \
 	unzip \
 	gtk2 \
-        PackageKit-gtk3-module \ 
-        libcanberra-gtk2 
+    PackageKit-gtk3-module \ 
+    libcanberra-gtk2 
 
 # append the gtk library to the PATH environment variable 
 RUN export PATH=$PATH:/usr/lib64/libgtk-x11-2.0.so.0
