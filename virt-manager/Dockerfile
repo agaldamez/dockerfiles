@@ -1,20 +1,26 @@
-# Run virt-manager in a container 
+# Run virt-manager in a container
 #
-# docker run -it --rm -e DISPLAY=$DISPLAY -v /home/$USER/.ssh/known_hosts:/root/.ssh/known_hosts:ro virt-manager 
+# Note: You can not allocate a tty (-it) because it will ask for credentils via tty instead of the GUI.
+#
+# docker run -d \
+#    -e DISPLAY=$DISPLAY \
+#    -v /home/$USER/.ssh/known_hosts:/root/.ssh/known_hosts:ro \
+#    --net=host \
+#    --name virt-manager \
+#    virt-manager
 #
 FROM fedora:latest
 LABEL maintainer "agaldamez"
 
-#RUN dnf update -y && dnf install -y \
-RUN dnf install -y \
+RUN dnf update -y && dnf install -y \
     virt-manager \
     openssh-clients \
     openssh-askpass \
     PackageKit-gtk3-module \
     dbus-x11 
-    
-RUN mkdir /root/.ssh
-RUN chmod 700 /root/.ssh
 
-#ENTRYPOINT [ "virt-manager", "--no-fork" ]
-CMD [ "/usr/bin/virt-manager --no-fork" ]
+ENV SSH_ASKPASS /usr/libexec/openssh/gnome-ssh-askpass
+
+RUN mkdir -m 700 /root/.ssh
+
+ENTRYPOINT [ "virt-manager", "--no-fork" ]
