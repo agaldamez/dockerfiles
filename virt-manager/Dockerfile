@@ -5,6 +5,7 @@
 # docker run -d \
 #    -e DISPLAY=$DISPLAY \
 #    -v /home/$USER/.ssh/known_hosts:/root/.ssh/known_hosts:ro \
+#    -v /var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock \
 #    --net=host \
 #    --name virt-manager \
 #    virt-manager
