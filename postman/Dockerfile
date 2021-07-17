@@ -2,7 +2,7 @@
 #
 # docker run -ti -d \
 #   -v /tmp/.X11-unix:/tmp/.X11-unix \
-#   -v /home/$USER/Projects/Postman:/root/.config/ \
+#   -v /home/$USER/Projects/Postman:/home/developer/.config/ \
 #   -e DISPLAY=$DISPLAY \
 #   --name postman \
 #   postman
@@ -29,5 +29,10 @@ RUN mkdir -p /opt/postman && \
     wget -O /tmp/postman.tar.gz https://dl.pstmn.io/download/latest/linux64 && \
     tar -xzf /tmp/postman.tar.gz -C /opt/postman --strip-components=1 && \
     rm -rf /tmp/postman.tar.gz
+
+RUN useradd -m developer
+
+USER developer
+WORKDIR /home/developer
 
 ENTRYPOINT [ "/opt/postman/Postman" ]
