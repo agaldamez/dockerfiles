@@ -1,9 +1,9 @@
 # Run NetworkMiner from a container
 #
 # docker run -it -d \
-#	-e DISPLAY=$DISPLAY \ 
+#	-e DISPLAY=$DISPLAY \
 #	-v /tmp/.X11-unix:/tmp/.X11-unix \
-#	-v /home/$USER/Projects/trace:/home/$USER/trace \
+#   -v "$(pwd):/home/networkminer" \
 #	--name network-miner \
 #   network-miner
 #
