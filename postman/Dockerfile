@@ -2,7 +2,7 @@
 #
 # docker run -ti -d \
 #   -v /tmp/.X11-unix:/tmp/.X11-unix \
-#   -v /home/$USER/Projects/Postman:/home/developer/.config/ \
+#   -v /home/$USER/.config/Postman:/home/developer/.config/Postman \
 #   -e DISPLAY=$DISPLAY \
 #   --name postman \
 #   postman
