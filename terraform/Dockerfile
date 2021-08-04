@@ -3,6 +3,7 @@
 # docker run -it --rm \
 #   -v "${HOME}:${HOME}:ro" \
 #   -v "$(pwd):/usr/src/repo" \
+#   -v /var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock \
 #   --workdir /usr/src/repo \
 #   --name terraform \
 #   terraform "$@"
