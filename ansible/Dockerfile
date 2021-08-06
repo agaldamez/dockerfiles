@@ -13,4 +13,4 @@ LABEL maintainer "agaldamez"
 RUN apk add --update --no-cache \
     ansible
 
-CMD [ "ansible" ]
+ENTRYPOINT [ "ansible" ]
