@@ -12,7 +12,8 @@ FROM alpine:latest
 LABEL maintainer "agaldamez"
 
 RUN apk add --update --no-cache \
-    wget
+    wget \
+    xorriso
     
 WORKDIR /usr/bin
 
