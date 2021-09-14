@@ -4,8 +4,8 @@
 #
 # docker run -d \
 #    -e DISPLAY=$DISPLAY \
-#    -v /home/$USER/.ssh/known_hosts:/root/.ssh/known_hosts:ro \
 #    -v /var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock \
+#    -v /home/$USER/.ssh/known_hosts:/home/virt-manager/.ssh/known_hosts:ro \
 #    --net=host \
 #    --name virt-manager \
 #    virt-manager
@@ -22,6 +22,11 @@ RUN dnf update -y && dnf install -y \
 
 ENV SSH_ASKPASS /usr/libexec/openssh/gnome-ssh-askpass
 
-RUN mkdir -m 700 /root/.ssh
+RUN useradd virt-manager && \
+    mkdir -m 700 /home/virt-manager/.ssh && \
+    chown virt-manager:virt-manager /home/virt-manager/.ssh
+
+USER virt-manager
+WORKDIR /home/virt-manager
 
 ENTRYPOINT [ "virt-manager", "--no-fork" ]
