@@ -1,0 +1,17 @@
+# Build and run virt-manager from a docker-compose file
+# 
+# docker-compose up -d --build
+# docker-compose up -d
+
+version: "3"
+services:
+  virt-manager:
+    build: .
+    image: virt-manager
+    container_name: virt-manager
+    volumes:
+      - /var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock
+      - /home/$USER/.ssh/known_hosts:/home/virt-manager/.ssh/known_hosts:ro
+    network_mode: "host" 
+    environment:
+      DISPLAY: $DISPLAY
