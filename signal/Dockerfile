@@ -5,6 +5,7 @@
 #    -e DISPLAY=$DISPLAY \
 #    -v /tmp/.X11-unix:/tmp/.X11-unix \
 #    --net=host \
+#    -v ${HOME}/.config/Signal:/root/.config/Signal \
 #    --name signal signal
 #    
 FROM debian:bookworm-slim
